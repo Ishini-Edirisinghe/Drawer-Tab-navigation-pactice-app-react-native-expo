@@ -11,11 +11,11 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { DrawerContentComponentProps } from "@react-navigation/drawer";
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-function CustomDrawerContent(props: DrawerContentComponentProps) {
+function CustomDrawerContent() {
   const pathname = usePathname();
 
   return (
@@ -76,6 +76,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
           About
         </Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={[
           styles.navItem,
@@ -84,7 +85,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
         onPress={() => router.push("/(tabs)/explore")}
       >
         <Feather
-          name="info"
+          name="map"
           size={24}
           color={pathname === "/(tabs)/explore" ? "#fff" : "#000"}
         />
@@ -120,11 +121,10 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Drawer
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
+        drawerContent={() => <CustomDrawerContent />}
         screenOptions={{ headerShown: false }}
       >
-        {/* <Drawer.Screen name="index" options={{ title: "Home" }} />
-        <Drawer.Screen name="about" options={{ title: "About" }} /> */}
+        {/* Add Drawer Screens here if needed */}
       </Drawer>
     </ThemeProvider>
   );
